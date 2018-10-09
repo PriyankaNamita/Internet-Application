@@ -1,0 +1,48 @@
+﻿@model IEnumerable<HealthCare.Models.Appointment>
+
+@{
+    ViewBag.Title = "AllAppointment";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<h2 class="text-primary">All Appointments</h2>
+
+<table class="table">
+    <tr class="text-danger">
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayName("Customer Name")
+        </th>
+        <th>
+            @Html.DisplayName("Customer Email")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnDate)
+        </td>
+        <td>
+            @Html.ActionLink("Upload Report", "UploadReport", new { id = item.CustomerID })
+
+        </td>
+    </tr>
+}
+
+</table>

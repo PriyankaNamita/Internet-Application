@@ -1,0 +1,39 @@
+﻿@model HealthCare.Models.Report
+
+@{
+    ViewBag.Title = "UploadReport";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<h2>UploadReport</h2>
+
+@using (Html.BeginForm("UploadReport", "Doctor", FormMethod.Post,new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Report</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.Label("Select a pdf file", htmlAttributes: new { @class = "control-label col-md-2 text-danger" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ReportFile,new { @class = "control-label col-md-4 btn btn-primary" , type = "file" }) 
+                @Html.ValidationMessageFor(model => model.ReportFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="UPLOAD" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Appointment")
+</div>

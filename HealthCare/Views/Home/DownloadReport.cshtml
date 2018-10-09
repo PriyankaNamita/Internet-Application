@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HealthCare.Models.Report>
+
+@{
+    ViewBag.Title = "DownloadReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DownloadReport</h2>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.OnDate)
+        </td>
+        <td>
+            @Html.ActionLink("Download", "DownloadExampleFiles", "Home", new { fileName = item.Path }, new { @target = "_blank",@class="btn btn-info" }) 
+
+        </td>
+    </tr>
+}
+
+</table>

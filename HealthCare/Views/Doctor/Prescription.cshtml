@@ -1,0 +1,89 @@
+﻿@model HealthCare.Models.PresMed
+
+@{
+    ViewBag.Title = "Prescription";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<h2>Give Prescription</h2>
+
+ 
+<table class="table" id="mytable">
+    <tr>
+        <th>
+           @Html.DisplayNameFor(m => m.Medicine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Dosage)
+        </th>
+        <th></th>
+    </tr>
+
+
+    <tr>
+        <td>
+            @Html.DropDownList("Id", (SelectList)ViewBag.Name, " ", new { @class = "td" })
+        </td>
+        <td>
+            <input type="text" class="td"/>
+        </td>
+
+    </tr>
+
+
+</table>
+<a class="btn btn-primary" id="addrows">Add Medicines</a>
+<a class="btn btn-primary" id="sendData">Ok</a>
+<div>
+    @Html.ActionLink("Back to List", "Appointment")
+</div>
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $("#addrows").click(function () {
+        $("#mytable").each(function () {
+            var tds = '<tr>';
+            jQuery.each($('tr:last td', this), function () {
+                tds += '<td>' + $(this).html() + '</td>';
+            });
+            tds += '</tr>';
+            if ($('tbody', this).length > 0) {
+                $('tbody', this).append(tds);
+            } else {
+                $(this).append(tds);
+            }
+        });
+    });
+    var a = {
+        ID: '',
+        PresMed: []
+    };
+    a.appointmentId = @ViewBag.ID
+    $("#sendData").click(function () {
+        var tdIds = $('.td');
+        for (var i = 0; i < tdIds.length; i++) {
+            console.log(tdIds[i].value);
+            a.PresMed.push({ MedicineID: tdIds[i].value, Dosage: tdIds[i+1].value})
+            i++;
+        }
+        console.log(a);
+        if (a != null) {
+            $.ajax({
+                type: "POST",
+                url: "/Doctor/Prescription",
+                data: JSON.stringify(a),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function () {
+                    window.location.href = '/Doctor/Appointment'
+                    
+                },
+                failure: function () {
+                    window.location.href = '/Doctor/Appointment'
+                },
+                error: function () {
+                    window.location.href = '/Doctor/Appointment'
+                }  
+            });
+        }
+    })
+</script>

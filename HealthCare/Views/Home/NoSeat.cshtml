@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "NoSeat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>No Seat Available For Selected Day</h2>
+
+@Html.ActionLink("Book Appointment", "BookAppointment", new { id = ViewBag.Id })|

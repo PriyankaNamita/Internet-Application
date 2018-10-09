@@ -1,0 +1,91 @@
+﻿@model HealthCare.Models.Review
+
+@{
+    ViewBag.Title = "WriteReview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Write Review</h2>
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Review</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                    <small class="text-danger">Rating between 1 to 10</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Your Review", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ReviewText, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ReviewText, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "ViewDoc")
+    </div>*@
+
+<div class="row">
+    <div class="col-md-12">
+        <section id="loginForm">
+            @using (Html.BeginForm("WriteReview", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <h5> <i class="fa fa-link" aria-hidden="true"> </i> <a href="http://summernote.org/"> Summernote Rich Text WYSIWYG Editor </a> </h5> <hr /> <div class="form-group">
+
+            <div class="form-group col-md-12">
+                @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                    <small class="text-danger">Rating between 1 to 10</small>
+                </div>
+            </div>
+            <hr />
+            <div class="input-group">
+                <label class="col-md-12 control-label"> Your Review </label> <div class="col-md-12">
+                    @Html.TextAreaFor(m => m.ReviewText, new
+            {
+                rows = "20",
+                style = "resize:none;width:400px;",
+                placeholder = Html.DisplayNameFor(m => m.ReviewText),
+                @class = "form-control input-lg textarea-editor"
+            })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+}
+        </section>
+    </div>
+</div>
+
+@section Scripts { <script type = "text/javascript" src = "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"> </script>
+    @Scripts.Render("~/bundles/script-custom-editor") <link href = "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel = "stylesheet">
+}
+

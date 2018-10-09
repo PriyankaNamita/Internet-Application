@@ -1,0 +1,48 @@
+﻿@model HealthCare.Models.Prescription
+
+@{
+    ViewBag.Title = "Prescription";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Prescription</h2>
+
+<div>
+    <h4>Prescription</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppointmentID)
+        </dd>
+
+
+    </dl>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Medicine ID")
+            </th>
+            <th>
+                @Html.DisplayName("Dosage")
+            </th>
+        </tr>
+
+        @foreach (var item in Model.PresMed)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medicine.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dosage)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

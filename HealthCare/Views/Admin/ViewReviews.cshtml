@@ -1,0 +1,72 @@
+﻿@model IEnumerable<HealthCare.Models.Review>
+
+@{
+    ViewBag.Title = "ViewReviews";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-primary">Reviews</h2>
+
+<table class="table">
+    <tr class="text-danger">
+        <th>
+            @Html.DisplayName("Writer")
+        </th>
+        <th>
+            @Html.DisplayName("Writer Email")
+        </th>
+        <th>
+            @Html.DisplayName("Doctor")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayName("Review")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnDate)
+        </th>
+        <th>
+            @Html.DisplayName("Action")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doctor.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnDate)
+        </td>
+        @if (item.IsArchive)
+        {
+            <td>
+                @Html.ActionLink("Undo Archive", "Archive", new { id = item.ID })
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.ActionLink("Archive", "Archive", new { id = item.ID })
+            </td>
+        }
+
+    </tr>
+}
+
+</table>
